@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD User</title>
+</head>
+<body>
+    <form role="form" method="post" th:action="@{/bUser/save}" class="form-horizontal">
+        <input type="hidden" name="_method" value="put" th:if="${session.bUser!=null}"/>
+        <input type="hidden" name="id" th:if="${session.bUser!=null}" th:value="${session.bUser.getId()}">
+        <div class="form-group">
+            <label>username</label>
+            <input type="text" class="form-control" name="name" placeholder="please enter your username" th:value="${session.bUser!=null}?${session.bUser.getName()}">
+        </div>
+        <div role="form-group">
+            <label>User Type</label>
+            <select name="type" th:value="${session.bUser!=null}?${session.bUser.getName()}">
+                <option name="type" value="1">Administrator</option>
+                <option name="type" value="2">Student</option>
+                <option name="type" value="3">Seller</option>
+            </select>
+        </div>
+        <div role="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" placeholder="please enter your password" th:value="${session.bUser!=null}?${session.bUser.getPassword()}">
+        </div>
+        <div role="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

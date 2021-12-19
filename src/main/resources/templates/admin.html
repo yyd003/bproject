@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://bing.campuscardcenter.com/ch/style_94.css" type="text/css">
+</head>
+
+<body>
+<div id="masthead">
+    <link rel="shortcut icon" href="https://bing.campuscardcenter.com/ch/images/favicon_1.ico">
+    <h1 id="siteName"><img src="https://bing.campuscardcenter.com/ch/images/issuerLogo_94.jpg" border="0">
+    </h1>
+</div>
+<title>BU ID Card</title>
+
+<div>
+
+    <h2>Account Home </h2>
+    <table width="499" border="0">
+        <tbody><tr>
+            <td width="383"><table width="350" border="0">
+                <tbody><tr>
+                    <td width="94"><strong>Name</strong></td>
+                    <td nowrap="" colspan="2">[[${session.loginUser.name}]]</td>
+                </tr>
+                <!--Hide cards for US Bank Mail Card clients -->
+                <tr>
+                    <td nowrap="">
+                        <strong>BU ID<strong>
+                        </strong></strong></td>
+                    <td nowrap="" colspan="2">[[${session.loginUser.id}]]</td>
+                </tr>
+                <tr>
+                    <td nowrap="">
+                        <strong>User type<strong>
+                        </strong></strong></td>
+                    <div th:switch="${session.loginUser.type}">
+                        <td nowrapi="" colspan="2" th:case="1">Administrator</td>
+                        <td nowrapi="" colspan="2" th:case="2">Student</td>
+                        <td nowrapi="" colspan="2" th:case="3">Seller</td>
+                    </div>
+                </tr>
+                <tr>
+                    <td nowrap="">
+                        <strong>balance<strong>
+                        </strong></strong></td>
+                    <td nowrap="" colspan="2">[[${session.loginUser.balance}]]</td>
+                    <a class="btn btn-sm btn-primary" th:href= "@{'/bUser/findById/{id}'(id=${session.loginUser.getId()})}">Edit</a>
+                </tr>
+                <!-- Display USBank Status -->
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <!-- Display American Express Status -->
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody></table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h5>Transaction History</h5>
+    <div>
+        <form>
+            <table border="0" cellspacing="0">
+
+                <thead>
+
+                <tr class="heading">
+                    <th width="90" style="height:1px; color: white" class="rightborderleftborder">BRecords Id</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">seller Id</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">customerId</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">comment</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">amount</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">order Time</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">operation</th></tr>
+                </thead>
+
+                <tbody>
+                <tr class="even" th:each="BRecord:${session.BRecords}">
+                    <td align="left" width="10%" th:text="${BRecord.getId()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:text="${BRecord.getSellerId()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:text="${BRecord.getCustomerId()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:text="${BRecord.getComment()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:text="${BRecord.getAmount()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:text="${BRecord.getOrderTime()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;">N/A</td>
+
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <a class="btn btn-sm btn-success" th:href="@{/addValue}">Add Value</a>
+                <br></br>
+                <a class="btn btn-sm btn-success" th:href="@{/withdraw}">Withdraw</a>
+            </div>
+            <p>&nbsp;</p>
+        </form>
+    </div>
+</div>
+<div th:replace="~{model::navBar}"></div>
+</body>
+</html>

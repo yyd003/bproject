@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://bing.campuscardcenter.com/ch/style_94.css" type="text/css">
+</head>
+
+<body>
+<div id="masthead">
+    <link rel="shortcut icon" href="https://bing.campuscardcenter.com/ch/images/favicon_1.ico">
+    <h1 id="siteName"><img src="https://bing.campuscardcenter.com/ch/images/issuerLogo_94.jpg" border="0">
+    </h1>
+</div>
+<title>BU ID Card</title>
+
+<div>
+
+    <h2 th:text="${session.loginUser.name}+'\'s Order Builder'"></h2>
+    <br></br>
+    <a class="btn btn-sm btn-success" th:href="@{/bMenu/save}">Add Menu</a>
+    <br></br>
+    <div>
+        <table border="0" cellspacing="0">
+
+            <thead>
+
+            <tr class="heading">
+                <th width="90" style="height:1px; color: white" class="rightborderleftborder">BMenus Id</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">SellerId</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">name</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">price</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">Amonut</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">operation</th>
+                <th width="65" style="height:0px;color: white" class="rightborderleftborder">item price</th>
+            </thead>
+
+            <tbody>
+            <tr class="even" th:each="BMenu:${session.BMenus}">
+                <td align="left" width="10%" name="id" th:text="${BMenu.getId()}"></td>
+                <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                    name="SellerId" th:text="${BMenu.getSellerId()}"></td>
+
+                <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                    th:text="${BMenu.getName()}"></td>
+
+                <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                    th:text="${BMenu.getPrice()}" th:id="price+${BMenuStat.index}"></td>
+
+                <td align="center">
+                    <div><input type="number" value="0" name="number" th:id="amount+${BMenuStat.index}"
+                                onchange="foo()"></div>
+                </td>
+
+                <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;">
+                    <div>
+                        <a th:href="@{'/bMenu/findBMenuById/{id}'(id=${BMenu.getId()})}">Edit</a>
+                        <a th:href="@{'/bMenu/deleteById/{id}'(id=${BMenu.getId()})}">Delete</a>
+                    </div>
+                </td>
+
+                <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                    th:id="itemPrice+${BMenuStat.index}">0
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div>
+            <p> Total: $<i id="show">0</i></p>
+            <!--                <p> list size: <i th:text="${#lists.size(session.BMenus)}">0</i></p>-->
+        </div>
+        <div style="width:756px; height:68px; border:1px solid #000000;">
+            <form class="form-horizontal" method="post"
+                  role="form"
+                  th:action="@{/bRecord/save}">
+                <input type="hidden" id="sh0w" value="0" name="amount">
+                <div class="form-group">
+                    <label>Customer Id</label>
+                    <input type="text" class="form-control" name="customerId"
+                           placeholder="please enter Customer's Id">
+                </div>
+                <button class="btn btn-sm btn-success"
+                        type="submit"
+                        onclick="foo0()">Create Order
+                </button>
+            </form>
+            <br>
+        </div>
+        <p>&nbsp;</p>
+
+        <p>&nbsp;</p>
+    </div>
+</div>
+<div th:replace="~{model::navBar}"></div>
+</body>
+<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+<script type="text/javascript">
+
+    function foo() {
+        let total = 0;
+        for (let i = 0; i <= [[${#lists.size(session.BMenus)}]] - 1; i++) {
+            let itemPrice = document.getElementById("price" + i).innerHTML * document.getElementById("amount" + i).value;
+            document.getElementById('itemPrice' + i).innerHTML = itemPrice;
+            total += itemPrice;
+        }
+        document.getElementById("show").innerHTML = total;
+        document.getElementById("sh0w").value = total;
+    }
+
+    function foo0() {
+        alert("The order has been build!\n Please let customer take the meal.")
+    }
+
+</script>
+</html>

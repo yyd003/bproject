@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://bing.campuscardcenter.com/ch/style_94.css" type="text/css">
+</head>
+
+<body>
+<div id="masthead">
+    <link rel="shortcut icon" href="https://bing.campuscardcenter.com/ch/images/favicon_1.ico">
+    <h1 id="siteName"><img src="https://bing.campuscardcenter.com/ch/images/issuerLogo_94.jpg" border="0">
+    </h1>
+</div>
+<title>BU ID Card</title>
+
+<div>
+
+    <h5>User Manager</h5>
+    <div>
+        <form>
+            <table border="0" cellspacing="0">
+
+                <thead>
+
+                <tr class="heading">
+                    <th width="90" style="height:1px; color: white" class="rightborderleftborder">BUser Id</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">Type</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">username</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">balance</th>
+                    <th width="65" style="height:0px;color: white" class="rightborderleftborder">operation</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr class="even" th:each="BUser:${session.BUsers}">
+                    <td align="left" width="10%" th:text="${BUser.getId()}"></td>
+
+                    <div th:switch="${BUser.getType()}">
+                        <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:case="1">
+                            Administrator
+                        </td>
+                        <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:case="2">
+                            Student
+                        </td>
+                        <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;" th:case="3">
+                            Seller
+                        </td>
+                    </div>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                        th:text="${BUser.getName()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;"
+                        th:text="${BUser.getBalance()}"></td>
+
+                    <td align="center" width="10%" style="overflow:hidden;text-overflow: ellipsis;">
+                        <a class="btn btn-sm btn-danger" th:href= "@{'/bUser/deleteById/{id}'(id=${BUser.id})}">Delete</a>
+                        <a class="btn btn-sm btn-primary" th:href= "@{'/bUser/findById/{id}'(id=${BUser.id})}">Edit</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-sm btn-success" th:href="@{/bUser/save}">Add User</a>
+            <br>
+            <br>
+            <p>&nbsp;</p>
+        </form>
+    </div>
+</div>
+<div th:replace="~{model::navBar}"></div>
+</body>
+</html>

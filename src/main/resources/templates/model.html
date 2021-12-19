@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://bing.campuscardcenter.com/ch/style_94.css" type="text/css">
+</head>
+
+<body>
+<div id="masthead">
+    <link rel="shortcut icon" href="https://bing.campuscardcenter.com/ch/images/favicon_1.ico">
+    <h1 id="siteName"><img src="https://bing.campuscardcenter.com/ch/images/issuerLogo_94.jpg" border="0">
+    </h1>
+</div>
+
+<title>BU ID Card</title>
+
+<div id="navBar" th:fragment="navBar">
+    <div id="sectionLinks">
+        <ul>
+            <li><a href="/admin.html">Account Home </a></li>
+            <li th:if="${session.loginUser.type}==1"><a th:href="@{/bUser}">User Manager </a></li>
+            <li th:if="${session.loginUser.type}==3"><a th:href="@{/bMenu}">Order Builder </a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

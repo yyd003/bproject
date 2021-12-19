@@ -1,0 +1,113 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <style type="text/css">
+        <!--
+
+        .style4 {
+            font-size: 100%;
+        }
+
+        -->
+    </style>
+
+</head>
+
+<body>
+<div id="masthead">
+
+    <h1 id="siteName"><img src="https://bing.campuscardcenter.com/ch/images/issuerLogo_94.jpg" border="0"></h1>
+
+</div>
+
+<title>BU ID Card</title>
+<!-- end masthead -->
+
+<div id="content">
+    <h2 id="pageName">Cardholder Account Center</h2>
+
+    <div class="feature">
+
+        <table width="100" border="1">
+            <tbody>
+            <tr>
+                <td valign="top">
+                    <table width="400px" border="0">
+                        <form method="post" th:action="@{/login}">
+                            <tbody>
+                            <tr bgcolor="#CCCCCC">
+                                <td colspan="4"><font size="4" face="Arial, Helvetica, sans-serif">Log In </font></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td colspan="2"><span class="style4">
+				 						Cardholders and Authorized Guests Log In here.<br>
+                                        Usernames and Passwords are case sensitive.
+										</span></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <p th:text="${msg}" style="color:red" th:if="${not #strings.isEmpty(msg)}"></p>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div align="right"><strong>Username : </strong></div>
+                                </td>
+                                <td><input name="username" type="text" value="" size="16">
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div align="right"><strong>Password : </strong></div>
+                                </td>
+
+                                <td><input name="password" type="password" size="16">
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td colspan="2">
+                                    <div align="center">
+                                        <input class="button" type="submit">
+                                    </div>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </form>
+
+                    </table>
+                </td>
+
+                <!-- Single Sign On Display -->
+
+
+            </tr>
+
+            <!-- AddValue Display -->
+
+            </tbody>
+        </table>
+
+        <!-- US Bank Disbursement verbiage -->
+
+        <!-- Single Sign On Display -->
+
+    </div>
+</div>
+<!--end content -->
+
+<br>
+
+</body>
+</html>

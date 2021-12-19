@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD Menu</title>
+</head>
+<body>
+    <form role="form" method="post" th:action="@{/bMenu/save}" class="form-horizontal">
+        <input type="hidden" name="_method" value="put" th:if="${session.bMenu!=null}"/>
+        <input type="hidden" name="id" th:if="${session.bMenu!=null}" th:value="${session.bMenu.getId()}">
+        <input type="hidden" name="sellerId" th:value="${session.loginUser.getId()}">
+        <div class="form-group">
+            <label>name</label>
+            <input type="text" class="form-control" name="name" placeholder="please enter your deli's name" th:value="${session.bMenu!=null}?${session.bMenu.getName()}">
+        </div>
+        <div role="form-group">
+            <label>price</label>
+            <input type="text" class="form-control" name="price" placeholder="please set deli's price" th:value="${session.bMenu!=null}?${session.bMenu.getPrice()}">
+        </div>
+        <div role="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html>

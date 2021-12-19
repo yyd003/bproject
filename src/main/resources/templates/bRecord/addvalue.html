@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Value</title>
+</head>
+<body>
+<p th:text="'There\'s $'+ ${session.loginUser.balance} + ' in your account!'"></p>
+
+<form class="form-horizontal" method="post"
+      role="form"
+      th:if="${#httpServletRequest.requestURI} != '/addValue'"
+      th:action="@{/bRecord/withdraw}">
+    <div class="form-group">
+        <label>id:</label>
+        <input type="text" class="form-control"
+               th:name="${#httpServletRequest.requestURI}=='/addValue'? 'sellerId' :'customerId'"
+               placeholder="Please enter your id"
+               th:value="${session.loginUser!=null}?${session.loginUser.getId()}"
+               th:if${session.loginUser.getType()}!="1" ? readonly>
+    </div>
+    <div role="form-group">
+        <label>amount:</label>
+        <input type="text" class="form-control" name="amount" placeholder="Please enter the amount you want to ">
+    </div>
+    <div role="form-group">
+        <button type="submit" class="btn btn-primary"
+                th:text="${#httpServletRequest.requestURI}=='/addValue'? 'Add Value' :'Withdraw'">
+
+        </button>
+    </div>
+</form>
+
+<form class="form-horizontal" method="post"
+      role="form"
+      th:if="${#httpServletRequest.requestURI} == '/addValue'"
+      th:action="@{/bRecord/addValue}">
+
+    <div class="form-group">
+        <label>id:</label>
+        <input type="text" class="form-control"
+               th:name="${#httpServletRequest.requestURI}=='/addValue'? 'sellerId' :'customerId'"
+               placeholder="please enter your username"
+               th:value="${session.loginUser!=null}?${session.loginUser.getId()}"
+               th:if${session.loginUser.getType()}!="1" ?readonly>
+    </div>
+    <div role="form-group">
+        <label>amount:</label>
+        <input type="text" class="form-control" name="amount" placeholder="Please enter the amount you want to ">
+    </div>
+    <div role="form-group">
+        <button type="submit" class="btn btn-primary"
+                th:text="${#httpServletRequest.requestURI}=='/addValue'? 'Add Value' :'Withdraw'">
+
+        </button>
+    </div>
+</form>
+</body>
+</html>
